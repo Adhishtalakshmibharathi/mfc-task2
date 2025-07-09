@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multi-Functional Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      transition: background 0.3s, color 0.3s;
+    }
+    .light-theme {
+      background-color: #f9f9f9;
+      color: #222;
+    }
+    .dark-theme {
+      background-color: #222;
+      color: #f9f9f9;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+    input, select, button {
+      margin: 5px;
+      padding: 8px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body class="light-theme">
+  <div class="container">
+    <h1>Multi-Functional Calculator</h1>
+    <button id="toggle-theme">Switch Theme</button>
+
+    <section>
+      <h2>Basic Arithmetic</h2>
+      <input id="num1" type="number" placeholder="Enter first number" />
+      <input id="num2" type="number" placeholder="Enter second number" />
+      <select id="operation">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value=""></option>
+        <option value="/">/</option>
+      </select>
+      <button onclick="calculateBasic()">Calculate</button>
+      <p id="basic-result">Result: </p>
+    </section>
+
+    <section>
+      <h2>Geometric Calculator</h2>
+      <div>
+        <h3>Circle Area</h3>
+        <input id="circle-radius" type="number" placeholder="Radius" />
+        <button onclick="calcCircleArea()">Calculate</button>
+        <p id="circle-result">Area: </p>
+      </div>
+
+      <div>
+        <h3>Rectangle Area</h3>
+        <input id="rect-length" type="number" placeholder="Length" />
+        <input id="rect-width" type="number" placeholder="Width" />
+        <button onclick="calcRectangleArea()">Calculate</button>
+        <p id="rect-result">Area: </p>
+      </div>
+
+      <div>
+        <h3>Cube Volume</h3>
+        <input id="cube-side" type="number" placeholder="Side Length" />
+        <button onclick="calcCubeVolume()">Calculate</button>
+        <p id="cube-result">Volume: </p>
+      </div>
+
+      <div>
+        <h3>Sphere Volume</h3>
+        <input id="sphere-radius" type="number" placeholder="Radius" />
+        <button onclick="calcSphereVolume()">Calculate</button>
+        <p id="sphere-result">Volume: </p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.getElementById("toggle-theme").addEventListener("click", () => {
+      document.body.classList.toggle("dark-theme");
+      document.body.classList.toggle("light-theme");
+    });
+
+    function calculateBasic() {
+      const n1 = parseFloat(document.getElementById("num1").value);
+      const n2 = parseFloat(document.getElementById("num2").value);
+      const op = document.getElementById("operation").value;
+      let result = "Invalid";
+
+      switch(op) {
+        case "+": result = n1 + n2; break;
+        case "-": result = n1 - n2; break;
+        case "*": result = n1 * n2; break;
+        case "/": result = n2 !== 0 ? n1 / n2 : "Error (divide by 0)"; break;
+      }
+
+      document.getElementById("basic-result").innerText = "Result: " + result;
+    }
+
+    function calcCircleArea() {
+      const r = parseFloat(document.getElementById("circle-radius").value);
+      const area = Math.PI * r * r;
+      document.getElementById("circle-result").innerText = "Area: " + area.toFixed(2);
+    }
+
+    function calcRectangleArea() {
+      const l = parseFloat(document.getElementById("rect-length").value);
+      const w = parseFloat(document.getElementById("rect-width").value);
+      const area = l * w;
+      document.getElementById("rect-result").innerText = "Area: " + area.toFixed(2);
+    }
+
+    function calcCubeVolume() {
+      const s = parseFloat(document.getElementById("cube-side").value);
+      const volume = s ** 3;
+      document.getElementById("cube-result").innerText = "Volume: " + volume.toFixed(2);
+    }
+
+    function calcSphereVolume() {
+      const r = parseFloat(document.getElementById("sphere-radius").value);
+      const volume = (4 / 3) * Math.PI * r ** 3;
+      document.getElementById("sphere-result").innerText = "Volume: " + volume.toFixed(2);
+    }
+  </script>
+</body>
+</html>
